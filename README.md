@@ -1,21 +1,25 @@
 **以下[]内を指定のものに変えてください。  
-基本的に以下に書いたコマンド以外は使いません。**
------
+基本的に以下に書いたコマンド以外は使いません。**  
+
+=====
 
 マスターブランチに移動  
-`git checkout master`
+    git checkout master
+    
 
 作業をするときはブランチを作る
 branch名は、*スクリプト/モデル名*にしてください。
 
     git branch [branch名]
-
-    例) git branch MainObjectMenuManager
-    例) git branch model_ball
-
+    
+```html:sample
+ git branch MainObjectMenuManager
+ git branch model_ball
+```
 
 作成したブランチに移動する  
-`git checkout [branch名]`
+    git checkout [branch名]
+    
 
 ブランチを作ったら、指定の場所にスクリプト/モデルを作る。その後、
 
@@ -37,15 +41,16 @@ branch名は、*スクリプト/モデル名*にしてください。
 
 `- [ ]`はチェックボックスのコマンドです
 
-    例)
-    ーーーーーーーーーーーーーーーーーーー
-    タイトル : MainObjectMenuManagerの制作
-    コメント : 
-    - [ ] Start
-    - [ ] Update
-    - [ ] setObject
-    - [ ] unsetObject
-    ーーーーーーーーーーーーーーーーーーー 
+```html:sample
+ーーーーーーーーーーーーーーーーーーー
+タイトル : MainObjectMenuManagerの制作
+コメント : 
+- [ ] Start
+- [ ] Update
+- [ ] setObject
+- [ ] unsetObject
+ーーーーーーーーーーーーーーーーーーー 
+```
 
 を入力し、`Create pull request`を押す  
 これで作業を行うブランチの準備ができました。  
