@@ -1,23 +1,23 @@
-**以下[]内を指定のものに変えてください。  
+**以下[ ]内を指定のものに変えてください。  
 基本的に以下に書いたコマンド以外は使いません。**  
-
 =====
 
 マスターブランチに移動  
+
     git checkout master
-    
 
 作業をするときはブランチを作る
 branch名は、*スクリプト/モデル名*にしてください。
 
     git branch [branch名]
-    
-```html:sample
- git branch MainObjectMenuManager
- git branch model_ball
+
+```console:sample
+ $ git branch MainObjectMenuManager
+ $ git branch model_ball
 ```
 
 作成したブランチに移動する  
+
     git checkout [branch名]
     
 
@@ -41,7 +41,7 @@ branch名は、*スクリプト/モデル名*にしてください。
 
 `- [ ]`はチェックボックスのコマンドです
 
-```html:sample
+```console:sample
 ーーーーーーーーーーーーーーーーーーー
 タイトル : MainObjectMenuManagerの制作
 コメント : 
