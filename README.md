@@ -6,15 +6,13 @@
 ＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
 
 マスターブランチに移動
-'
-git checkout master
-'
+'git checkout master'
 
 作業をするときはブランチを作る
 branch名は、スクリプト/モデル名にしてください。
-'
-git branch [branch名]
-'
+
+    git branch [branch名]
+
 '
 例) git branch MainObjectMenuManager
 例) git branch model_ball
