@@ -6,50 +6,48 @@
 ＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
 
 マスターブランチに移動
-'git checkout master'
+    git checkout master
 
 作業をするときはブランチを作る
 branch名は、スクリプト/モデル名にしてください。
 
     git branch [branch名]
 
-'
-例) git branch MainObjectMenuManager
-例) git branch model_ball
-'
+
+    例) git branch MainObjectMenuManager
+    例) git branch model_ball
+
 
 作成したブランチに移動する
-'git checkout [branch名]'
+    git checkout [branch名]
 
 ブランチを作ったら、指定の場所にスクリプト/モデルを作る。その後、
 
-'
-git add [ファイルの場所]
-git commit -m “[branch名]の制作”
-git push origin [branch名]
-'
+    git add [ファイルの場所]
+    git commit -m “[branch名]の制作”
+    git push origin [branch名]
 
 ブラウザの escapeVR_3G のページ（https://github.com/shihoooox/escapeVR_3G）で
 「Compare & pull request」を押す。移動先のページで、
 
-ーーーーーーーーーーーーーーーーーーー
-タイトル : [スクリプト名]の制作
-コメント : 
-- [ ] メソッド名（モデルの場合必要無し）
-- [ ] メソッド名
-	　：
-ーーーーーーーーーーーーーーーーーーー 
+    ーーーーーーーーーーーーーーーーーーー
+    タイトル : [スクリプト名]の制作
+    コメント : 
+    - [ ] メソッド名（モデルの場合必要無し）
+    - [ ] メソッド名
+    	　：
+    ーーーーーーーーーーーーーーーーーーー 
 ＊＊ - [ ] はチェックボックスのコマンドです ＊＊
 
-例)
-ーーーーーーーーーーーーーーーーーーー
-タイトル : MainObjectMenuManagerの制作
-コメント : 
-- [ ] Start
-- [ ] Update
-- [ ] setObject
-- [ ] unsetObject
-ーーーーーーーーーーーーーーーーーーー 
+    例)
+    ーーーーーーーーーーーーーーーーーーー
+    タイトル : MainObjectMenuManagerの制作
+    コメント : 
+    - [ ] Start
+    - [ ] Update
+    - [ ] setObject
+    - [ ] unsetObject
+    ーーーーーーーーーーーーーーーーーーー 
 
 を入力し、Create pull request を押す
 これで作業を行うブランチの準備ができました。
@@ -60,9 +58,9 @@ git push origin [branch名]
 
 ある程度作業が進む or 作業が終わったら、
 
-'git add [ファイルの場所]
-git commit -m “[進捗状態]”
-git push origin [branch名]'
+    git add [ファイルの場所]
+    git commit -m “[進捗状態]”
+    git push origin [branch名]
 
 を行う
 
