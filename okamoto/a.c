@@ -3,8 +3,10 @@
 // printfiz                                                                     
 
 
-// printbuzz                                                                    
-
+// printbuzz
+void printBuzz() {
+  printf("buzz\n");
+}
 
 // printfizzbuzz  
 
