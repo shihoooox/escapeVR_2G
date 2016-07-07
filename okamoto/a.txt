@@ -1,4 +1,4 @@
 okamoto.txt
-void a() {
+void l() {
 
 }
