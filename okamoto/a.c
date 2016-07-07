@@ -5,8 +5,10 @@ void fizz() {
   printf("fizz\n");
 }
 
-// printbuzz                                                                    
-
+// printbuzz
+void printBuzz() {
+  printf("buzz\n");
+}
 
 // printfizzbuzz  
 
