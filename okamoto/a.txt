@@ -1,1 +1,4 @@
 okamoto.txt
+int b() {
+
+}
