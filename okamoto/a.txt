@@ -1,4 +1,6 @@
 okamoto.txt
+int r() {
+}
 void l() {
 
 }
