@@ -11,7 +11,11 @@ void printBuzz() {
 }
 
 // printfizzbuzz  
+void fizzBuzz() {
 
+  printf("fizzBuzz\n");
+  
+}
 
 // roop(max x)
 
