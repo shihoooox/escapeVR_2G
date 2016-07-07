@@ -1,7 +1,9 @@
 #include <stdio.h>
 
-// printfiz                                                                     
-
+// printfizz
+void fizz() {
+  printf("fizz\n");
+}
 
 // printbuzz                                                                    
 
