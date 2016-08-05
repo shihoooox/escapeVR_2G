@@ -8,7 +8,7 @@ using System;
 public class ObjectMover : MonoBehaviour
 {
 
-	
+
 	public enum EasingFunction
 	{
 		Linear,//等速に移動(moveType0に相当)
@@ -18,11 +18,12 @@ public class ObjectMover : MonoBehaviour
 	}
 
 	public GameObject target;//移動する先のオブジェクトを指定
+	public GameObject movedObject;
 	public float T0;//移動する時間を指定
 	public bool trigger;//trueでイージング発動する.イージングが終わると、falseになる.
 	public EasingFunction easingFunction;//イージング関数のタイプ
-	
-	
+
+
 	private float duration;//nowTime(s)
 	private Vector3 diff;//ターゲットとの距離ベクトル
 	private Vector3 initPos;//イージング前のこのゲームオブジェクトの初期位置
@@ -35,10 +36,10 @@ public class ObjectMover : MonoBehaviour
 		duration = 0;
 
 		//ターゲットになっている座標から現在、紐付けされている座標の差をとる
-		diff = target.transform.position - this.transform.position;
+		diff = target.transform.position - movedObject.transform.position;
 
-		//現在、紐付けあれている座標を初期値とする
-		initPos = this.transform.position;
+		//現在、紐付けされている座標を初期値とする
+		initPos = movedObject.transform.position;
 
 		//Debug.Log(diff);
 	}
@@ -46,19 +47,39 @@ public class ObjectMover : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		moveObject();//velocity(1flame)
+		
+		int moveType = 0;
+
+		switch (easingFunction) {
+		case EasingFunction.Linear:
+			moveType = 0;
+			break;
+		case EasingFunction.EaseInQuad:
+			moveType = 3;
+			break;
+
+		case EasingFunction.EaseOutQuad:
+			moveType = 2;
+			break;
+
+		case EasingFunction.EaseInOutQuad:
+			moveType = 1;
+			break;
+		}
+
+		moveObject(movedObject,target.transform,moveType,T0);//velocity(1flame)
 	}
 
 
-	void moveObject()
+	void moveObject(GameObject movedObject,Transform transform,int moveType,float T0)
 	{
 		/*
 		 *	easingする前 
 		 */
 		if (!trigger)
 		{
-			diff = target.transform.position - this.transform.position;
-			initPos = this.transform.position;
+			diff = transform.position - movedObject.transform.position;
+			initPos = movedObject.transform.position;
 			return;
 		}
 
@@ -70,85 +91,85 @@ public class ObjectMover : MonoBehaviour
 		{
 			trigger = false;//easingが終わったのでfalseにする.
 			duration = 0;
-			this.transform.position = target.transform.position;
+			movedObject.transform.position = transform.position;
 			return;
 		}
 
+		//Debug.Log("x:" + diff.x + "y:" + diff.y + "z:" + diff.z);
+		//Debug.Log("aaaduration:" + duration + ", T0:" +  T0 + ", x:" + diff.x + ", y:" + diff.y + ", z:" + diff.z);
 
-		//Debug.Log("duration:" + duration + ", T0:" +  T0 + ", x:" + diff.x + ", y:" + diff.y + ", z:" + diff.z);
-
-		switch (easingFunction)
+		switch (moveType)
 		{
 
-			//等速に移動(moveType0に相当)
-			case EasingFunction.Linear:
-				this.transform.position =
-					new Vector3(
-						linear(duration, T0, diff.x),
-						linear(duration, T0, diff.y),
-						linear(duration, T0, diff.z)
-					) + initPos;
-				break;
+		//等速に移動(moveType0に相当)
+		case 0:
+			movedObject.transform.position =
+				new Vector3(
+					linear(duration, T0, diff.x),
+					linear(duration, T0, diff.y),
+					linear(duration, T0, diff.z)
+				) + initPos;
+			break;
 
 			//だんだん速くなる(moveType3に相当)
-			case EasingFunction.EaseInQuad:
-				this.transform.position =
-					new Vector3(
-						easeInQuad(duration, T0, diff.x),
-						easeInQuad(duration, T0, diff.y),
-						easeInQuad(duration, T0, diff.z)
-					) + initPos;
-				break;
+		case 3:
+			movedObject.transform.position =
+				new Vector3(
+					easeInQuad(duration, T0, diff.x),
+					easeInQuad(duration, T0, diff.y),
+					easeInQuad(duration, T0, diff.z)
+				) + initPos;
+			break;
 
 			//だんだん遅くなる(moveType2に相当)
-			case EasingFunction.EaseOutQuad:
-				this.transform.position =
-					new Vector3(
-						easeOutQuad(duration, T0, diff.x),
-						easeOutQuad(duration, T0, diff.y),
-						easeOutQuad(duration, T0, diff.z)
-					) + initPos;
-				break;
+		case 2:
+			movedObject.transform.position =
+				new Vector3(
+					easeOutQuad(duration, T0, diff.x),
+					easeOutQuad(duration, T0, diff.y),
+					easeOutQuad(duration, T0, diff.z)
+				) + initPos;
+			break;
 
 			//だんだん速くなってだんだん遅くなる(moveType1に相当)
-			case EasingFunction.EaseInOutQuad:
+		case 1:
 
 
-				if (duration < T0 / 2)
-				{
-					//だんだん速くなる
-					inOutSwitch = false;
-					this.transform.position =
+			if (duration < T0 / 2)
+			{
+				//だんだん速くなる
+				inOutSwitch = false;
+				movedObject.transform.position =
 					new Vector3(
 						easeInQuad(duration, T0 / 2, diff.x / 2),
 						easeInQuad(duration, T0 / 2, diff.y / 2),
 						easeInQuad(duration, T0 / 2, diff.z / 2)
 					) + initPos;
-				}
-				else
+			}
+			else
+			{
+				//だんだん遅くなる
+				if (!inOutSwitch)
 				{
-					//だんだん遅くなる
-					if (!inOutSwitch)
-					{
-						diff = target.transform.position - this.transform.position;
-						initPos = this.transform.position;
-						inOutSwitch = true;
-						tempDuration = 0;
-					}
+					diff = transform.position - movedObject.transform.position;
+					initPos = movedObject.transform.position;
+					inOutSwitch = true;
+					tempDuration = 0;
+				}
 
-					this.transform.position =
+				movedObject.transform.position =
 					new Vector3(
 						easeOutQuad(tempDuration, T0 / 2, diff.x),
 						easeOutQuad(tempDuration, T0 / 2, diff.y),
 						easeOutQuad(tempDuration, T0 / 2, diff.z)
 					) + initPos;
 
-				}
-				
-				break;
+			}
+
+			break;
 		}
 
-		
+
 		/*
 		 * 時間をすすめる
 		 */	
@@ -160,7 +181,7 @@ public class ObjectMover : MonoBehaviour
 
 	}
 
-	
+
 
 
 	/*
@@ -193,7 +214,7 @@ public class ObjectMover : MonoBehaviour
 		float a = L0 / Mathf.Pow(T0, 2);
 		return -a * Mathf.Pow(time - T0, 2) + L0;
 	}
-	
+
 
 
 }
